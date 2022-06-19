@@ -99,13 +99,13 @@ class Home extends StatelessWidget {
               decoration: const BoxDecoration(
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: Color.fromRGBO(0, 138, 167, 0.4),
+                    color: Color.fromRGBO(0, 138, 167, 0.7),
                     blurRadius: 60.0,
                     offset: Offset(0.0, 0.0),
                   ),
                 ],
               ),
-              height: size.height * 0.36,
+              height: size.height * 0.38,
               margin: const EdgeInsets.only(bottom: 10),
               width: double.infinity,
               child: Card(
