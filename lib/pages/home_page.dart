@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geniopay_test/colors.dart';
 import 'package:geniopay_test/models/home_banner.dart';
+import 'package:geniopay_test/models/transaction.dart';
 import 'package:geniopay_test/utils/hex_color.dart';
 
 class HomePage extends StatelessWidget {
@@ -273,9 +274,11 @@ class TopHeader extends StatelessWidget {
 
 class CardDetails extends StatelessWidget {
   final List<HomeBanner> _banners = [];
+  final List<Transaction> _transactions = [];
 
   CardDetails({Key? key}) : super(key: key) {
     _addBanners();
+    _addTransactions();
   }
 
   @override
@@ -318,7 +321,58 @@ class CardDetails extends StatelessWidget {
               );
             },
           ),
-        )
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                'Transactions',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'View All',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          height: 100,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: _transactions.length,
+            itemBuilder: ((context, index) {
+              final Transaction _transaction = _transactions[index];
+              return ListTile(
+                title: Text(_transaction.detail),
+                subtitle: Text(_transaction.date),
+                leading: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: AppColor.lightPrimary,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ClipOval(
+                      child: Image.network(_transaction.icon),
+                    ),
+                  ),
+                ),
+                trailing: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(_transaction.amount),
+                    Text(_transaction.status)
+                  ],
+                ),
+              );
+            }),
+          ),
+        ),
       ],
     );
   }
@@ -329,5 +383,24 @@ class CardDetails extends StatelessWidget {
     _banners.add(HomeBanner(
         "https://via.placeholder.com/150", "#E0F7FE", "Refer and earn \$20"));
     _banners.add(HomeBanner("https://via.placeholder.com/150", "#DCD1FD", ""));
+  }
+
+  void _addTransactions() {
+    _transactions.add(
+      Transaction(
+          amount: "amount",
+          date: "date",
+          detail: "detail",
+          icon: "https://via.placeholder.com/150",
+          status: "status"),
+    );
+    _transactions.add(
+      Transaction(
+          amount: "amount",
+          date: "date",
+          detail: "detail",
+          icon: "https://via.placeholder.com/150",
+          status: "status"),
+    );
   }
 }
