@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'bottom_navigation.dart';
 import 'colors.dart';
+import 'pages/home_page.dart';
+import 'pages/wallet_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +28,12 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const BottomNavigationBarWidget(),
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => const BottomNavigationBarWidget(),
+        '/wallet-detail': (context) => const WalletDetailScreen(),
+      },
     );
   }
 }
